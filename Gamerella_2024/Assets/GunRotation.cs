@@ -40,6 +40,6 @@ public class GunRotation : MonoBehaviour
             transform.localScale = new Vector3(1,1, 1);
 
         }
-        Debug.Log(facingDirection);
+        //Debug.Log(facingDirection);
     }
 }
