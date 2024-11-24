@@ -21,7 +21,7 @@ public class GunRotation : MonoBehaviour
 
         transform.right = -direction;
 
-        Debug.Log(transform.rotation.z);
+        //Debug.Log(transform.rotation.z);
 
         if((transform.rotation.z > 0.71 ||  transform.rotation.z < -0.71) && facingDirection != "RIGHT")
         {
