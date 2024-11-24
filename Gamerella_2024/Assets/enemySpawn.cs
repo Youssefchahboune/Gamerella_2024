@@ -12,10 +12,14 @@ public class enemySpawn : MonoBehaviour
 
     private float currentCooldown;  // Track the current cooldown timer
 
+    private AudioSource spawnSoundEffect;
+
     void Start()
     {
         // Set the initial random cooldown between minCooldown and maxCooldown
         SetRandomCooldown();
+
+        spawnSoundEffect = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -26,6 +30,8 @@ public class enemySpawn : MonoBehaviour
         {
             // Instantiate the enemy at the spawn point
             Instantiate(enemyDropletPrefab, spawnPoint.position, Quaternion.identity);
+
+            spawnSoundEffect.Play();
 
             // Set a new random cooldown for the next spawn
             SetRandomCooldown();

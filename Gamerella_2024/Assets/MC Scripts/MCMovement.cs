@@ -9,11 +9,15 @@ public class MCMovement : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 movementDirection;
     private Animator animator;
+    private AudioSource audioSource;
+    private bool walkingSoundPlaying = false;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -25,10 +29,18 @@ public class MCMovement : MonoBehaviour
             if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.W))
             {
                 animator.SetBool("IsMoving", true);
+                
+                if(!walkingSoundPlaying) {
+                    audioSource.Play();
+                    walkingSoundPlaying = true;
+                }
+                
             }
             else
             {
                 animator.SetBool("IsMoving", false);
+                walkingSoundPlaying = false;
+                audioSource.Stop();
             }
         }
     }

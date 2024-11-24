@@ -6,6 +6,14 @@ TagManager:
   tags:
   - hearth
   - arson
+  - bullet
+  - enemy
+  - score text
+  - arson health bar
+  - hearth health bar
+  - bulletTextUI
+  - hearthParts
+  - FlashMaterial
   layers:
   - Default
   - TransparentFX

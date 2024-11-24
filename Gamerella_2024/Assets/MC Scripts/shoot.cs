@@ -6,39 +6,79 @@ using UnityEngine;
 
 public class shoot : MonoBehaviour
 {
-    [SerializeField] GameObject bulletPrefab;
-    [SerializeField] GameObject firePoint;
-    [SerializeField] float bulletspeed;
-    [SerializeField] private float shootCooldown = .1f;
-    private float Cooldown;
+    [SerializeField] GameObject bulletPrefab;           
+    [SerializeField] GameObject firePoint;              
+    [SerializeField] float bulletSpeed;                 
+    [SerializeField] private float shootCooldown = 0.1f; 
+    private float currentShootCooldown;                 
 
-    [SerializeField] public TextMeshProUGUI bulletText;
-    [SerializeField] public int maxBullet = 25;
+    [SerializeField] public TextMeshProUGUI bulletText;  
+    [SerializeField] public int maxBullet = 25;         
     [SerializeField] public int currentAmountOfBullet;
+
+    public AudioSource reloadAudio;
+    public AudioSource gunshotAudio;
 
     void Start()
     {
-        Cooldown = shootCooldown;
+        currentShootCooldown = shootCooldown;
 
         GameObject bulletTextUI = GameObject.FindGameObjectWithTag("bulletTextUI");
         bulletText = bulletTextUI.GetComponent<TextMeshProUGUI>();
         currentAmountOfBullet = maxBullet;
-        bulletText.text = currentAmountOfBullet + " / " + maxBullet;
+        UpdateBulletText();
+
+        reloadAudio = GetComponents<AudioSource>()[0];
+       
+        gunshotAudio = GetComponents<AudioSource>()[1];
     }
 
     void Update()
     {
-        shootCooldown -= Time.deltaTime;
-        if (Input.GetMouseButtonDown(0) && (shootCooldown <= 0f) )
+        
+        if (currentAmountOfBullet > 0)
         {
-            currentAmountOfBullet = currentAmountOfBullet - 1;
-            bulletText.text = currentAmountOfBullet + " / " + maxBullet;
+            currentShootCooldown -= Time.deltaTime;  
 
-            GameObject newBullet = Instantiate(bulletPrefab,firePoint.transform.position,firePoint.transform.rotation);
-            newBullet.GetComponent<Rigidbody2D>().AddForce(-firePoint.transform.right * bulletspeed,ForceMode2D.Impulse);
-            Destroy(newBullet,1f);
+            if (Input.GetMouseButtonDown(0) && currentShootCooldown <= 0f)
+            {
+                gunshotAudio.Play();
+                FireBullet();
 
-            shootCooldown = Cooldown;
+                
+                currentShootCooldown = shootCooldown;
+            }
         }
+        else
+        {
+            
+            ReloadBullets();
+        }
+    }
+
+    private void FireBullet()
+    {
+        currentAmountOfBullet--;  
+        UpdateBulletText();        
+
+        
+        GameObject newBullet = Instantiate(bulletPrefab, firePoint.transform.position, firePoint.transform.rotation);
+        newBullet.GetComponent<Rigidbody2D>().AddForce(-firePoint.transform.right * bulletSpeed, ForceMode2D.Impulse);
+
+        
+        Destroy(newBullet, 1f);
+    }
+
+    private void ReloadBullets()
+    {
+        reloadAudio.Play();
+        currentAmountOfBullet = maxBullet;
+        UpdateBulletText();
+    }
+
+    private void UpdateBulletText()
+    {
+        
+        bulletText.text = currentAmountOfBullet + " / " + maxBullet;
     }
 }
