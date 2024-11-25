@@ -1,4 +1,4 @@
-# Gamerella_2024 - 2024 Game Jam
+# Gamerella_2024 - Game Jam
 
 ![image](https://github.com/user-attachments/assets/c51e04e3-c6c3-4ea8-873e-5e3c52853988)
 
