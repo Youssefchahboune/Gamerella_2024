@@ -27,6 +27,7 @@ Sound Design: Sander Zwarenstein
 - unity
 - C#
 - pixelart
+- Ableton Live Suite 9
 
 ## Itch.io Page
 itch.io page : https://oldwrld.itch.io/arsons-stand
