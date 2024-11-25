@@ -30,7 +30,7 @@ Sound Design: Sander Zwarenstein
 - Ableton Live Suite 9
 
 ## Itch.io Page
-itch.io page : https://oldwrld.itch.io/arsons-stand
+Click this link if you want to play our game ! -> itch.io page : https://oldwrld.itch.io/arsons-stand
 
 ## Images
 ![image](https://github.com/user-attachments/assets/54ec6f37-2c48-433c-a636-c753c8489951)
